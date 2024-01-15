@@ -58,7 +58,7 @@ Public Class FrmAuth
             Dim refresh_token_expires_at As DateTime = DateTime.Now.AddSeconds(tokenResponse.RefreshTokenExpiresIn)
 
             SaveToken("code", code)
-            SaveToken("code", realmId)
+            SaveToken("realmId", realmId)
             SaveToken("AccessToken", tokenResponse.AccessToken)
             SaveToken("AccessTokenExpiresAt", DateTime.Now.AddSeconds(tokenResponse.AccessTokenExpiresIn).ToString())
             SaveToken("RefreshToken", tokenResponse.RefreshToken)
