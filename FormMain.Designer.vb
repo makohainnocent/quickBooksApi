@@ -24,6 +24,8 @@ Partial Class FormMain
     Private Sub InitializeComponent()
         btnAddQuickBooks = New Button()
         btnCompanyInfo = New Button()
+        btnCreateAccount = New Button()
+        btnCreateCustomer = New Button()
         SuspendLayout()
         ' 
         ' btnAddQuickBooks
@@ -46,11 +48,33 @@ Partial Class FormMain
         btnCompanyInfo.Text = "company info"
         btnCompanyInfo.UseVisualStyleBackColor = True
         ' 
+        ' btnCreateAccount
+        ' 
+        btnCreateAccount.Location = New Point(951, 127)
+        btnCreateAccount.Margin = New Padding(4, 5, 4, 5)
+        btnCreateAccount.Name = "btnCreateAccount"
+        btnCreateAccount.Size = New Size(189, 52)
+        btnCreateAccount.TabIndex = 2
+        btnCreateAccount.Text = "create account"
+        btnCreateAccount.UseVisualStyleBackColor = True
+        ' 
+        ' btnCreateCustomer
+        ' 
+        btnCreateCustomer.Location = New Point(951, 189)
+        btnCreateCustomer.Margin = New Padding(4, 5, 4, 5)
+        btnCreateCustomer.Name = "btnCreateCustomer"
+        btnCreateCustomer.Size = New Size(189, 52)
+        btnCreateCustomer.TabIndex = 3
+        btnCreateCustomer.Text = "create customer"
+        btnCreateCustomer.UseVisualStyleBackColor = True
+        ' 
         ' FormMain
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1143, 750)
+        Controls.Add(btnCreateCustomer)
+        Controls.Add(btnCreateAccount)
         Controls.Add(btnCompanyInfo)
         Controls.Add(btnAddQuickBooks)
         Margin = New Padding(4, 5, 4, 5)
@@ -62,4 +86,6 @@ Partial Class FormMain
     Friend WithEvents btnAddQuickBooks As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents btnCompanyInfo As Button
+    Friend WithEvents btnCreateAccount As Button
+    Friend WithEvents btnCreateCustomer As Button
 End Class
