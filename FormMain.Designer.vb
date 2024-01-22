@@ -28,6 +28,8 @@ Partial Class FormMain
         btnCreateCustomer = New Button()
         Button2 = New Button()
         createQuickbooksItem = New Button()
+        createInvoice = New Button()
+        btnSendInvoice = New Button()
         SuspendLayout()
         ' 
         ' btnAddQuickBooks
@@ -90,11 +92,33 @@ Partial Class FormMain
         createQuickbooksItem.Text = "create item"
         createQuickbooksItem.UseVisualStyleBackColor = True
         ' 
+        ' createInvoice
+        ' 
+        createInvoice.Location = New Point(951, 375)
+        createInvoice.Margin = New Padding(4, 5, 4, 5)
+        createInvoice.Name = "createInvoice"
+        createInvoice.Size = New Size(189, 52)
+        createInvoice.TabIndex = 6
+        createInvoice.Text = "create invoice"
+        createInvoice.UseVisualStyleBackColor = True
+        ' 
+        ' btnSendInvoice
+        ' 
+        btnSendInvoice.Location = New Point(951, 449)
+        btnSendInvoice.Margin = New Padding(4, 5, 4, 5)
+        btnSendInvoice.Name = "btnSendInvoice"
+        btnSendInvoice.Size = New Size(189, 52)
+        btnSendInvoice.TabIndex = 7
+        btnSendInvoice.Text = "send invoice"
+        btnSendInvoice.UseVisualStyleBackColor = True
+        ' 
         ' FormMain
         ' 
-        AutoScaleDimensions = New SizeF(10F, 25F)
+        AutoScaleDimensions = New SizeF(10.0F, 25.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1143, 750)
+        Controls.Add(btnSendInvoice)
+        Controls.Add(createInvoice)
         Controls.Add(createQuickbooksItem)
         Controls.Add(Button2)
         Controls.Add(btnCreateCustomer)
@@ -114,4 +138,6 @@ Partial Class FormMain
     Friend WithEvents btnCreateCustomer As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents createQuickbooksItem As Button
+    Friend WithEvents createInvoice As Button
+    Friend WithEvents btnSendInvoice As Button
 End Class

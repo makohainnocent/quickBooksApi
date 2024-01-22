@@ -8,6 +8,7 @@ Imports Intuit.Ipp.Security
 Imports Intuit.Ipp.DataService
 
 Imports System.Security
+Imports Newtonsoft.Json.Linq
 
 
 Public Class FormMain
@@ -16,6 +17,7 @@ Public Class FormMain
     Private _oauthValidator As OAuth2RequestValidator
     Dim cAppConfig As Configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
     Dim asSettings As AppSettingsSection = cAppConfig.AppSettings
+    Dim addedInvoice As Invoice
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -263,4 +265,106 @@ Public Class FormMain
             Throw New Exception($"Error querying CompanyInfo: {ex.Message}")
         End Try
     End Function
+
+    Private Sub createInvoice_Click(sender As Object, e As EventArgs) Handles createInvoice.Click
+        Try
+            Dim realmId As String = asSettings.Settings("realmId").Value
+            InitializeServiceContext()
+
+            Dim dataService As New DataService(_serviceContext)
+
+            Dim account = QueryAccount()
+
+            Dim customer = QueryCustomer()
+
+            Dim Item As Item = CreateItem(account)
+
+            Dim ItemAdded = dataService.Add(Of Item)(Item)
+
+            Dim objInvoice = createQuickBooksInvoice(realmId, customer, ItemAdded)
+            addedInvoice = dataService.Add(Of Invoice)(objInvoice)
+
+            MsgBox("invoice created successfully")
+
+        Catch ex As Exception
+            ' Handle the exception here
+            MsgBox($"An error occurred while creating invoice: {ex.Message}")
+        End Try
+
+
+    End Sub
+
+    Private Function createQuickBooksInvoice(realmId As String, customer As Customer, item As Item) As Invoice
+
+        InitializeServiceContext()
+
+        Dim Invoice As New Invoice()
+        'Invoice.Deposit = New Decimal(0.00)
+        'Invoice.DepositSpecified = True
+        Dim lineList As New List(Of Line)()
+
+        Dim line As New Line()
+        line.Description = "Description"
+        line.Amount = New Decimal(100.0)
+        line.AmountSpecified = True
+
+        Invoice.CustomerRef = New ReferenceType With {
+            .Value = customer.Id
+        }
+
+
+        Dim SalesItemLineDetail As New SalesItemLineDetail()
+        SalesItemLineDetail.Qty = New Decimal(1.0)
+        SalesItemLineDetail.ItemRef = New ReferenceType() With {
+            .Value = item.Id
+        }
+
+        line.AnyIntuitObject = SalesItemLineDetail
+
+        line.DetailType = LineDetailTypeEnum.SalesItemLineDetail
+        line.DetailTypeSpecified = True
+
+        lineList.Add(line)
+        Invoice.Line = lineList.ToArray()
+
+        'Step 5 Set other properties such as Total Amount, Due Date, Email status And Transaction Date
+        Invoice.DueDate = DateTime.UtcNow.Date
+        Invoice.DueDateSpecified = True
+
+
+        Invoice.TotalAmt = New Decimal(10.0)
+        Invoice.TotalAmtSpecified = True
+
+        Invoice.EmailStatus = EmailStatusEnum.NotSet
+        Invoice.EmailStatusSpecified = True
+
+        Invoice.Balance = New Decimal(10.0)
+        Invoice.BalanceSpecified = True
+
+        Invoice.TxnDate = DateTime.UtcNow.Date
+        Invoice.TxnDateSpecified = True
+        Invoice.TxnTaxDetail = New TxnTaxDetail With {
+            .TotalTax = Convert.ToDecimal(10),
+            .TotalTaxSpecified = True
+        }
+
+        Return Invoice
+
+
+    End Function
+
+    Private Sub btnSendInvoice_Click(sender As Object, e As EventArgs) Handles btnSendInvoice.Click
+        Try
+            InitializeServiceContext()
+            Dim dataService As New DataService(_serviceContext)
+            dataService.SendEmail(Of Invoice)(addedInvoice, "vantagepoint2019@gmail.com")
+            MsgBox("invoice email sent successfully")
+
+        Catch ex As Exception
+            ' Handle the exception here
+            MsgBox($"An error occurred while sending invoice: {ex.Message}")
+        End Try
+
+
+    End Sub
 End Class
