@@ -163,8 +163,104 @@ Public Class FormMain
         Return customer
     End Function
 
+    Private Function CreateItem(incomeAccount As Account) As Item
+        Dim item As New Item()
+        Dim randomNum As New Random()
 
+        item.Name = "Replacement mak inno of Item-" & randomNum.Next()
+        item.Description = "Description"
+        item.Type = ItemTypeEnum.NonInventory
+        item.TypeSpecified = True
 
+        item.Active = True
+        item.ActiveSpecified = True
 
+        item.Taxable = False
+        item.TaxableSpecified = True
 
+        item.UnitPrice = New Decimal(100.0)
+        item.UnitPriceSpecified = True
+
+        item.TrackQtyOnHand = False
+        item.TrackQtyOnHandSpecified = True
+
+        item.IncomeAccountRef = New ReferenceType() With {
+        .name = incomeAccount.Name,
+        .Value = incomeAccount.Id
+    }
+
+        item.ExpenseAccountRef = New ReferenceType() With {
+        .name = incomeAccount.Name,
+        .Value = incomeAccount.Id
+    }
+
+        ' For inventory item, asset account reference is required
+
+        Return item
+    End Function
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim test As New test()
+        test.Show()
+    End Sub
+
+    Private Sub createQuickbooksItem_Click(sender As Object, e As EventArgs) Handles createQuickbooksItem.Click
+        InitializeServiceContext()
+        'QueryCustomer()
+        'QueryAccount()
+
+        Try
+
+            InitializeServiceContext()
+
+            Dim account = QueryAccount()
+
+            Dim dataService As New DataService(_serviceContext)
+
+            Dim Item As Item = CreateItem(account)
+
+            Dim ItemAdded = dataService.Add(Of Item)(Item)
+
+            Console.WriteLine(ItemAdded)
+
+            MsgBox("item created successfully")
+
+        Catch ex As Exception
+            Throw New Exception($"Error creating item: {ex.Message}")
+        End Try
+    End Sub
+
+    Private Function QueryCustomer() As Customer
+
+        Try
+            Dim queryService As New QueryService(Of Customer)(_serviceContext)
+            Dim customer As Customer = queryService.ExecuteIdsQuery("SELECT * FROM Customer").FirstOrDefault
+
+            If customer IsNot Nothing Then
+                'MsgBox(customer.GivenName)
+                Return customer
+            End If
+            MsgBox("nothing")
+            Return Nothing
+        Catch ex As Exception
+            Throw New Exception($"Error querying CompanyInfo: {ex.Message}")
+        End Try
+    End Function
+
+    Private Function QueryAccount() As Account
+
+        Try
+            Dim queryService As New QueryService(Of Account)(_serviceContext)
+            Dim account As Account = queryService.ExecuteIdsQuery($"SELECT * FROM Account where Classification='{AccountClassificationEnum.Revenue}'").FirstOrDefault
+
+            If account IsNot Nothing Then
+                MsgBox(account.Name)
+                Return account
+            End If
+            MsgBox("nothing")
+            Return Nothing
+        Catch ex As Exception
+            Throw New Exception($"Error querying CompanyInfo: {ex.Message}")
+        End Try
+    End Function
 End Class

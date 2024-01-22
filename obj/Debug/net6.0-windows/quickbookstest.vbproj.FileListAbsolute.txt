@@ -69,3 +69,4 @@ C:\Users\vanta\source\repos\quickbookstest\bin\Debug\net6.0-windows\Microsoft.We
 C:\Users\vanta\source\repos\quickbookstest\bin\Debug\net6.0-windows\Microsoft.Web.WebView2.Wpf.dll
 C:\Users\vanta\source\repos\quickbookstest\obj\Debug\net6.0-windows\quickbookstest.FrmAuth.resources
 C:\Users\vanta\source\repos\quickbookstest\bin\Debug\net6.0-windows\App.config
+C:\Users\vanta\source\repos\quickbookstest\obj\Debug\net6.0-windows\quickbookstest.test.resources

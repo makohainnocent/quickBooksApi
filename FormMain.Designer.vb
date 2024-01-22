@@ -26,6 +26,8 @@ Partial Class FormMain
         btnCompanyInfo = New Button()
         btnCreateAccount = New Button()
         btnCreateCustomer = New Button()
+        Button2 = New Button()
+        createQuickbooksItem = New Button()
         SuspendLayout()
         ' 
         ' btnAddQuickBooks
@@ -68,11 +70,33 @@ Partial Class FormMain
         btnCreateCustomer.Text = "create customer"
         btnCreateCustomer.UseVisualStyleBackColor = True
         ' 
+        ' Button2
+        ' 
+        Button2.Location = New Point(951, 251)
+        Button2.Margin = New Padding(4, 5, 4, 5)
+        Button2.Name = "Button2"
+        Button2.Size = New Size(189, 52)
+        Button2.TabIndex = 4
+        Button2.Text = "open test"
+        Button2.UseVisualStyleBackColor = True
+        ' 
+        ' createQuickbooksItem
+        ' 
+        createQuickbooksItem.Location = New Point(951, 313)
+        createQuickbooksItem.Margin = New Padding(4, 5, 4, 5)
+        createQuickbooksItem.Name = "createQuickbooksItem"
+        createQuickbooksItem.Size = New Size(189, 52)
+        createQuickbooksItem.TabIndex = 5
+        createQuickbooksItem.Text = "create item"
+        createQuickbooksItem.UseVisualStyleBackColor = True
+        ' 
         ' FormMain
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1143, 750)
+        Controls.Add(createQuickbooksItem)
+        Controls.Add(Button2)
         Controls.Add(btnCreateCustomer)
         Controls.Add(btnCreateAccount)
         Controls.Add(btnCompanyInfo)
@@ -88,4 +112,6 @@ Partial Class FormMain
     Friend WithEvents btnCompanyInfo As Button
     Friend WithEvents btnCreateAccount As Button
     Friend WithEvents btnCreateCustomer As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents createQuickbooksItem As Button
 End Class
