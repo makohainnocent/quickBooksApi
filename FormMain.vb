@@ -9,6 +9,20 @@ Imports Intuit.Ipp.DataService
 
 Imports System.Security
 Imports Newtonsoft.Json.Linq
+Imports Intuit.Ipp.ReportService
+
+
+Imports System
+Imports System.Collections.Generic
+Imports System.Linq
+Imports System.Net.Http
+Imports System.Threading.Tasks
+Imports System.Web
+Imports System.Web.Mvc
+Imports System.Net
+Imports System.Net.Http.Headers
+Imports System.Text.Json
+Imports Intuit.Ipp.Utility
 
 
 Public Class FormMain
@@ -367,4 +381,31 @@ Public Class FormMain
 
 
     End Sub
+
+    Private Sub btnProfitAndLossReport_Click(sender As Object, e As EventArgs) Handles btnProfitAndLossReport.Click
+        Try
+            InitializeServiceContext()
+            _serviceContext.IppConfiguration.Message.Request.SerializationFormat = SerializationFormat.Xml
+            _serviceContext.IppConfiguration.Message.Response.SerializationFormat = SerializationFormat.Xml
+            Dim dataService As New DataService(_serviceContext)
+            Dim dateRangeReportService1 As ReportService = New ReportService(_serviceContext)
+            'dateRangeReportService1.start_date = "2024-01-01"
+            'dateRangeReportService1.end_date = "2024-01-29"
+            Dim dateRangePnL As Report = dateRangeReportService1.ExecuteReport("ProfitAndLoss")
+
+            MsgBox("success generating profit and loss report")
+
+        Catch ex As Exception
+            ' Handle the exception here
+            MsgBox($"An error occurred while sending invoice: {ex.Message}")
+
+        Finally
+            ' Include any cleanup code that should run regardless of whether an exception occurred
+            ' For example, closing connections or releasing resources
+
+        End Try
+
+    End Sub
+
+
 End Class

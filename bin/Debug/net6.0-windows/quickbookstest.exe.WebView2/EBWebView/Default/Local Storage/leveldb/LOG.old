@@ -1,3 +1,6 @@
-2024/01/22-17:12:31.553 5e24 Reusing MANIFEST C:\Users\vanta\source\repos\quickbookstest\bin\Debug\net6.0-windows\quickbookstest.exe.WebView2\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
-2024/01/22-17:12:31.555 5e24 Recovering log #51
-2024/01/22-17:12:31.558 5e24 Reusing old log C:\Users\vanta\source\repos\quickbookstest\bin\Debug\net6.0-windows\quickbookstest.exe.WebView2\EBWebView\Default\Local Storage\leveldb/000051.log 
+2024/01/29-16:31:51.526 2cdc Reusing MANIFEST C:\Users\vanta\source\repos\quickbookstest\bin\Debug\net6.0-windows\quickbookstest.exe.WebView2\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
+2024/01/29-16:31:51.528 2cdc Recovering log #51
+2024/01/29-16:31:51.532 2cdc Reusing old log C:\Users\vanta\source\repos\quickbookstest\bin\Debug\net6.0-windows\quickbookstest.exe.WebView2\EBWebView\Default\Local Storage\leveldb/000051.log 
+2024/01/29-16:32:26.520 dec Level-0 table #54: started
+2024/01/29-16:32:26.542 dec Level-0 table #54: 27438 bytes OK
+2024/01/29-16:32:26.545 dec Delete type=0 #51

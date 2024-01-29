@@ -30,6 +30,7 @@ Partial Class FormMain
         createQuickbooksItem = New Button()
         createInvoice = New Button()
         btnSendInvoice = New Button()
+        btnProfitAndLossReport = New Button()
         SuspendLayout()
         ' 
         ' btnAddQuickBooks
@@ -112,11 +113,22 @@ Partial Class FormMain
         btnSendInvoice.Text = "send invoice"
         btnSendInvoice.UseVisualStyleBackColor = True
         ' 
+        ' btnProfitAndLossReport
+        ' 
+        btnProfitAndLossReport.Location = New Point(754, 3)
+        btnProfitAndLossReport.Margin = New Padding(4, 5, 4, 5)
+        btnProfitAndLossReport.Name = "btnProfitAndLossReport"
+        btnProfitAndLossReport.Size = New Size(189, 52)
+        btnProfitAndLossReport.TabIndex = 8
+        btnProfitAndLossReport.Text = "profit & loss report"
+        btnProfitAndLossReport.UseVisualStyleBackColor = True
+        ' 
         ' FormMain
         ' 
-        AutoScaleDimensions = New SizeF(10.0F, 25.0F)
+        AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1143, 750)
+        Controls.Add(btnProfitAndLossReport)
         Controls.Add(btnSendInvoice)
         Controls.Add(createInvoice)
         Controls.Add(createQuickbooksItem)
@@ -140,4 +152,5 @@ Partial Class FormMain
     Friend WithEvents createQuickbooksItem As Button
     Friend WithEvents createInvoice As Button
     Friend WithEvents btnSendInvoice As Button
+    Friend WithEvents btnProfitAndLossReport As Button
 End Class
